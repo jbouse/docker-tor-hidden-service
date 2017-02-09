@@ -1,12 +1,13 @@
 FROM    alpine
 
 ENV     HOME /var/lib/tor
+ENV     TOR_VERSION 0.2.8.8
 
 RUN     apk add --no-cache git libevent-dev openssl-dev gcc make automake ca-certificates autoconf musl-dev && \
         mkdir -p /usr/local/src/ && \
         git clone https://git.torproject.org/tor.git /usr/local/src/tor && \
         cd /usr/local/src/tor && \
-        git checkout $(git tag | tail -1) && \
+        git checkout tor-${TOR_VERSION} && \
         ./autogen.sh && \
         ./configure \
             --disable-asciidoc \
